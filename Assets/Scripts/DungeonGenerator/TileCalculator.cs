@@ -18,15 +18,15 @@ public class TileCalculator
     //placeholder way, I think these could be recursive as well
     public PieceType CheckPiece(int x, int y)
     {
-        if (isDoorWayInMiddleV2(new Vector2Int(x, y)))
+        if (IsDoorWayMiddle(new Vector2Int(x, y)))
         {
             return PieceType.Doorway;
         }
-        else if (isDoorwayOnRightCorner(new Vector2Int(x, y)))
+        else if (IsDoorwayOnRightCorner(new Vector2Int(x, y)))
         {
             return PieceType.DoorwayRightCorner;
         }
-        else if (isDoorwayOnLeftCorner(new Vector2Int(x, y)))
+        else if (IsDoorwayOnLeftCorner(new Vector2Int(x, y)))
         {
             return PieceType.DoorwayLeftCorner;
         }
@@ -45,14 +45,6 @@ public class TileCalculator
         return PieceType.Empty;
     }
 
-    // Potentially replace with all Vector2Int (unless we need floats, then Vector2)
-    // to render this.
-    bool IsPieceV2(Vector2Int coordinates)
-    {
-        return IsPiece(coordinates);
-
-    }
-
     bool IsPiece(Vector2Int coordinates)
     {
         if (coordinates.x < min.x || coordinates.y < min.y || coordinates.x > max.x - 1 || coordinates.y > max.y - 1)
@@ -68,54 +60,55 @@ public class TileCalculator
             return false;
         }
         return false;
+
     }
 
-    bool isDoorwayOnRightCorner(Vector2Int startCoord)
+    bool IsDoorwayOnRightCorner(Vector2Int startCoord)
     {
         //Checking if tile is at a corner
-        if (IsPieceV2(startCoord + Vector2Int.up) &&
-            IsPieceV2(startCoord + Vector2Int.down) &&
-            IsPieceV2(startCoord + Vector2Int.right) &&
-            !IsPieceV2(startCoord + Vector2Int.left)) // nothin on LEFT
+        if (IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down) &&
+            IsPiece(startCoord + Vector2Int.right) &&
+            !IsPiece(startCoord + Vector2Int.left)) // nothin on LEFT
         {
-            if (!IsPieceV2(startCoord + (Vector2Int.left + Vector2Int.up)) && //Checking the TOP Tile has pieces on the left and right
-                !IsPieceV2(startCoord + (Vector2Int.right + Vector2Int.up)))
+            if (!IsPiece(startCoord + (Vector2Int.left + Vector2Int.up)) && //Checking the TOP Tile has pieces on the left and right
+                !IsPiece(startCoord + (Vector2Int.right + Vector2Int.up)))
             {
                 grid[startCoord.x, startCoord.y].rotation = 180;
                 return true;
             }
         }
-        else if (!IsPieceV2(startCoord + Vector2Int.up) &&
-            IsPieceV2(startCoord + Vector2Int.down) &&
-            IsPieceV2(startCoord + Vector2Int.right) &&
-            IsPieceV2(startCoord + Vector2Int.left)) //TOP
+        else if (!IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down) &&
+            IsPiece(startCoord + Vector2Int.right) &&
+            IsPiece(startCoord + Vector2Int.left)) //TOP
         {
-            if (!IsPieceV2(startCoord + (Vector2Int.right + Vector2Int.up)) && //Checking the RIGHT Tile has pieces on the left and right
-                !IsPieceV2(startCoord + (Vector2Int.right + Vector2Int.down)))
+            if (!IsPiece(startCoord + (Vector2Int.right + Vector2Int.up)) && //Checking the RIGHT Tile has pieces on the left and right
+                !IsPiece(startCoord + (Vector2Int.right + Vector2Int.down)))
             {
                 grid[startCoord.x, startCoord.y].rotation = 90;
                 return true;
             }
         }
-        else if (IsPieceV2(startCoord + Vector2Int.up) &&
-            IsPieceV2(startCoord + Vector2Int.down) &&
-            !IsPieceV2(startCoord + Vector2Int.right) &&
-            IsPieceV2(startCoord + Vector2Int.left)) //RIGHT
+        else if (IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down) &&
+            !IsPiece(startCoord + Vector2Int.right) &&
+            IsPiece(startCoord + Vector2Int.left)) //RIGHT
         {
-            if (!IsPieceV2(startCoord + (Vector2Int.right + Vector2Int.down)) && //Checking the BOTTOM Tile has pieces on the left and right
-                !IsPieceV2(startCoord + (Vector2Int.left + Vector2Int.down)))
+            if (!IsPiece(startCoord + (Vector2Int.right + Vector2Int.down)) && //Checking the BOTTOM Tile has pieces on the left and right
+                !IsPiece(startCoord + (Vector2Int.left + Vector2Int.down)))
             {
                 grid[startCoord.x, startCoord.y].rotation = 0;
                 return true;
             }
         }
-        else if (IsPieceV2(startCoord + Vector2Int.up) &&
-            !IsPieceV2(startCoord + Vector2Int.down) &&
-            IsPieceV2(startCoord + Vector2Int.right) &&
-            IsPieceV2(startCoord + Vector2Int.left)) //BOTTOM
+        else if (IsPiece(startCoord + Vector2Int.up) &&
+            !IsPiece(startCoord + Vector2Int.down) &&
+            IsPiece(startCoord + Vector2Int.right) &&
+            IsPiece(startCoord + Vector2Int.left)) //BOTTOM
         {
-            if (!IsPieceV2(startCoord + (Vector2Int.left + Vector2Int.up)) && //Checking the LEFT Tile has pieces on the left and right
-                !IsPieceV2(startCoord + (Vector2Int.left + Vector2Int.down)))
+            if (!IsPiece(startCoord + (Vector2Int.left + Vector2Int.up)) && //Checking the LEFT Tile has pieces on the left and right
+                !IsPiece(startCoord + (Vector2Int.left + Vector2Int.down)))
             {
                 grid[startCoord.x, startCoord.y].rotation = 270;
                 return true;
@@ -124,52 +117,52 @@ public class TileCalculator
         return false;
     }
 
-    bool isDoorwayOnLeftCorner(Vector2Int startCoord)
+    bool IsDoorwayOnLeftCorner(Vector2Int startCoord)
     {
         //Checking if tile is at a corner
-        if (IsPieceV2(startCoord + Vector2Int.up) &&
-            IsPieceV2(startCoord + Vector2Int.down) &&
-            IsPieceV2(startCoord + Vector2Int.right) &&
-            !IsPieceV2(startCoord + Vector2Int.left)) // LEFT
+        if (IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down) &&
+            IsPiece(startCoord + Vector2Int.right) &&
+            !IsPiece(startCoord + Vector2Int.left)) // LEFT
         {
-            if (!IsPieceV2(startCoord + (Vector2Int.left + Vector2Int.down)) && //Checking the Bottom Tile has pieces on the left and right
-                !IsPieceV2(startCoord + (Vector2Int.right + Vector2Int.down)))
+            if (!IsPiece(startCoord + (Vector2Int.left + Vector2Int.down)) && //Checking the Bottom Tile has pieces on the left and right
+                !IsPiece(startCoord + (Vector2Int.right + Vector2Int.down)))
             {
                 grid[startCoord.x, startCoord.y].rotation = 0;
                 return true;
             }
         }
-        else if (!IsPieceV2(startCoord + Vector2Int.up) &&
-            IsPieceV2(startCoord + Vector2Int.down) &&
-            IsPieceV2(startCoord + Vector2Int.right) &&
-            IsPieceV2(startCoord + Vector2Int.left)) //TOP
+        else if (!IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down) &&
+            IsPiece(startCoord + Vector2Int.right) &&
+            IsPiece(startCoord + Vector2Int.left)) //TOP
         {
-            if (!IsPieceV2(startCoord + (Vector2Int.left + Vector2Int.up)) && //Checking the RIGHT Tile has pieces on the left and right
-                !IsPieceV2(startCoord + (Vector2Int.left + Vector2Int.down)))
+            if (!IsPiece(startCoord + (Vector2Int.left + Vector2Int.up)) && //Checking the RIGHT Tile has pieces on the left and right
+                !IsPiece(startCoord + (Vector2Int.left + Vector2Int.down)))
             {
                 grid[startCoord.x, startCoord.y].rotation = 270;
                 return true;
             }
         }
-        else if (IsPieceV2(startCoord + Vector2Int.up) &&
-        IsPieceV2(startCoord + Vector2Int.down) &&
-        !IsPieceV2(startCoord + Vector2Int.right) &&
-        IsPieceV2(startCoord + Vector2Int.left)) //RIGHT
+        else if (IsPiece(startCoord + Vector2Int.up) &&
+        IsPiece(startCoord + Vector2Int.down) &&
+        !IsPiece(startCoord + Vector2Int.right) &&
+        IsPiece(startCoord + Vector2Int.left)) //RIGHT
         {
-            if (!IsPieceV2(startCoord + (Vector2Int.right + Vector2Int.up)) && //Checking the BOTTOM Tile has pieces on the left and right
-                !IsPieceV2(startCoord + (Vector2Int.left + Vector2Int.up)))
+            if (!IsPiece(startCoord + (Vector2Int.right + Vector2Int.up)) && //Checking the BOTTOM Tile has pieces on the left and right
+                !IsPiece(startCoord + (Vector2Int.left + Vector2Int.up)))
             {
                 grid[startCoord.x, startCoord.y].rotation = 180;
                 return true;
             }
         }
-        else if (IsPieceV2(startCoord + Vector2Int.up) &&
-        !IsPieceV2(startCoord + Vector2Int.down) &&
-        IsPieceV2(startCoord + Vector2Int.right) &&
-        IsPieceV2(startCoord + Vector2Int.left)) //BOTTOM
+        else if (IsPiece(startCoord + Vector2Int.up) &&
+        !IsPiece(startCoord + Vector2Int.down) &&
+        IsPiece(startCoord + Vector2Int.right) &&
+        IsPiece(startCoord + Vector2Int.left)) //BOTTOM
         {
-            if (!IsPieceV2(startCoord + (Vector2Int.right + Vector2Int.up)) && //Checking the LEFT Tile has pieces on the left and right
-                !IsPieceV2(startCoord + (Vector2Int.right + Vector2Int.down)))
+            if (!IsPiece(startCoord + (Vector2Int.right + Vector2Int.up)) && //Checking the LEFT Tile has pieces on the left and right
+                !IsPiece(startCoord + (Vector2Int.right + Vector2Int.down)))
             {
                 grid[startCoord.x, startCoord.y].rotation = 90;
                 return true;
@@ -179,8 +172,7 @@ public class TileCalculator
     }
 
     /**
-     * Terrible name, but trying to determine if we have
-     * something like.
+     * Determining if there is a tile on all 4 sides
      *    
      *      X
      *     XxX
@@ -189,15 +181,13 @@ public class TileCalculator
     bool isCrossCenter(Vector2Int startCoord)
     {
         return (
-            IsPieceV2(startCoord + Vector2Int.left) &&
-            IsPieceV2(startCoord + Vector2Int.right) &&
-            IsPieceV2(startCoord + Vector2Int.up) &&
-            IsPieceV2(startCoord + Vector2Int.down)
+            IsPiece(startCoord + Vector2Int.left) &&
+            IsPiece(startCoord + Vector2Int.right) &&
+            IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down)
             );
     }
-
-
-    bool isDoorWayInMiddleV2(Vector2Int coordinates)
+    bool IsDoorWayMiddle(Vector2Int coordinates)
     {
         if (isCrossCenter(coordinates))
         {
@@ -211,51 +201,51 @@ public class TileCalculator
 
     bool CheckIfDoorIsNextToHallway(Vector2Int startCoord)
     {
-        if (IsPieceV2(startCoord + Vector2Int.up) &&
-            !IsPieceV2(startCoord + (Vector2Int.up + Vector2Int.left)) &&
-            !IsPieceV2(startCoord + (Vector2Int.up + Vector2Int.right)))
+        if (IsPiece(startCoord + Vector2Int.up) &&
+            !IsPiece(startCoord + (Vector2Int.up + Vector2Int.left)) &&
+            !IsPiece(startCoord + (Vector2Int.up + Vector2Int.right)))
         {
-            if (IsPieceV2(startCoord + Vector2Int.down) &&
-                !IsPieceV2(startCoord + (Vector2Int.down + Vector2Int.left)) &&
-                !IsPieceV2(startCoord + (Vector2Int.down + Vector2Int.right)))
+            if (IsPiece(startCoord + Vector2Int.down) &&
+                !IsPiece(startCoord + (Vector2Int.down + Vector2Int.left)) &&
+                !IsPiece(startCoord + (Vector2Int.down + Vector2Int.right)))
             {
                 return false;
             }
             grid[startCoord.x, startCoord.y].rotation = 180;
         }
-        else if (IsPieceV2(startCoord + (Vector2Int.right)) &&
-            !IsPieceV2(startCoord + (Vector2Int.right + Vector2Int.up)) &&
-            !IsPieceV2(startCoord + (Vector2Int.right + Vector2Int.down)))
+        else if (IsPiece(startCoord + (Vector2Int.right)) &&
+            !IsPiece(startCoord + (Vector2Int.right + Vector2Int.up)) &&
+            !IsPiece(startCoord + (Vector2Int.right + Vector2Int.down)))
         {
-            if (IsPieceV2(startCoord + (Vector2Int.left)) &&
-            !IsPieceV2(startCoord + (Vector2Int.left + Vector2Int.up)) &&
-            !IsPieceV2(startCoord + (Vector2Int.left + Vector2Int.down)))
+            if (IsPiece(startCoord + (Vector2Int.left)) &&
+            !IsPiece(startCoord + (Vector2Int.left + Vector2Int.up)) &&
+            !IsPiece(startCoord + (Vector2Int.left + Vector2Int.down)))
             {
                 return false;
             }
             grid[startCoord.x, startCoord.y].rotation = 90;
             return true;
         }
-        else if (IsPieceV2(startCoord + (Vector2Int.down)) &&
-            !IsPieceV2(startCoord + (Vector2Int.down + Vector2Int.right)) &&
-            !IsPieceV2(startCoord + (Vector2Int.down + Vector2Int.left)))
+        else if (IsPiece(startCoord + (Vector2Int.down)) &&
+            !IsPiece(startCoord + (Vector2Int.down + Vector2Int.right)) &&
+            !IsPiece(startCoord + (Vector2Int.down + Vector2Int.left)))
         {
-            if (IsPieceV2(startCoord + (Vector2Int.up)) &&
-                !IsPieceV2(startCoord + (Vector2Int.up + Vector2Int.right)) &&
-                !IsPieceV2(startCoord + (Vector2Int.up + Vector2Int.left)))
+            if (IsPiece(startCoord + (Vector2Int.up)) &&
+                !IsPiece(startCoord + (Vector2Int.up + Vector2Int.right)) &&
+                !IsPiece(startCoord + (Vector2Int.up + Vector2Int.left)))
             {
                 return false;
             }
             grid[startCoord.x, startCoord.y].rotation = 0;
             return true;
         }
-        else if (IsPieceV2(startCoord + (Vector2Int.left)) &&
-                !IsPieceV2(startCoord + (Vector2Int.left + Vector2Int.up)) &&
-                !IsPieceV2(startCoord + (Vector2Int.left + Vector2Int.down)))
+        else if (IsPiece(startCoord + (Vector2Int.left)) &&
+                !IsPiece(startCoord + (Vector2Int.left + Vector2Int.up)) &&
+                !IsPiece(startCoord + (Vector2Int.left + Vector2Int.down)))
         {
-            if (IsPieceV2(startCoord + (Vector2Int.right)) &&
-                !IsPieceV2(startCoord + (Vector2Int.right + Vector2Int.up)) &&
-                !IsPieceV2(startCoord + (Vector2Int.right + Vector2Int.down)))
+            if (IsPiece(startCoord + (Vector2Int.right)) &&
+                !IsPiece(startCoord + (Vector2Int.right + Vector2Int.up)) &&
+                !IsPiece(startCoord + (Vector2Int.right + Vector2Int.down)))
             {
                 return false;
             }
@@ -266,10 +256,10 @@ public class TileCalculator
     }
     bool IsHallway(Vector2Int startCoord)
     {
-        if (!IsPieceV2(startCoord + Vector2Int.right) &&
-            !IsPieceV2(startCoord + Vector2Int.left) &&
-            IsPieceV2(startCoord + Vector2Int.up) &&
-            IsPieceV2(startCoord + Vector2Int.down))
+        if (!IsPiece(startCoord + Vector2Int.right) &&
+            !IsPiece(startCoord + Vector2Int.left) &&
+            IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down))
         {
             grid[startCoord.x, startCoord.y].rotation = 0;
             return true;
@@ -286,34 +276,34 @@ public class TileCalculator
     }
     bool IsCorner(Vector2Int startCoord)
     {
-        if (IsPieceV2(startCoord + Vector2Int.right) &&
-            !IsPieceV2(startCoord + Vector2Int.left) &&
-            IsPieceV2(startCoord + Vector2Int.up) &&
-            !IsPieceV2(startCoord + Vector2Int.down)) //Top Left x+1 y, x y+1
+        if (IsPiece(startCoord + Vector2Int.right) &&
+            !IsPiece(startCoord + Vector2Int.left) &&
+            IsPiece(startCoord + Vector2Int.up) &&
+            !IsPiece(startCoord + Vector2Int.down)) //Top Left x+1 y, x y+1
         {
             grid[startCoord.x, startCoord.y].rotation = 0;
             return true;
         }
-        else if (!IsPieceV2(startCoord + Vector2Int.right) &&
-            IsPieceV2(startCoord + Vector2Int.left) &&
-            IsPieceV2(startCoord + Vector2Int.up) &&
-            !IsPieceV2(startCoord + Vector2Int.down)) //Top Right x y+1, x-1 y
+        else if (!IsPiece(startCoord + Vector2Int.right) &&
+            IsPiece(startCoord + Vector2Int.left) &&
+            IsPiece(startCoord + Vector2Int.up) &&
+            !IsPiece(startCoord + Vector2Int.down)) //Top Right x y+1, x-1 y
         {
             grid[startCoord.x, startCoord.y].rotation = 90;
             return true;
         }
-        else if (!IsPieceV2(startCoord + Vector2Int.right) &&
-            IsPieceV2(startCoord + Vector2Int.left) &&
-            !IsPieceV2(startCoord + Vector2Int.up) &&
-            IsPieceV2(startCoord + Vector2Int.down))//Bottom Left x-1 y, x y-1
+        else if (!IsPiece(startCoord + Vector2Int.right) &&
+            IsPiece(startCoord + Vector2Int.left) &&
+            !IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down))//Bottom Left x-1 y, x y-1
         {
             grid[startCoord.x, startCoord.y].rotation = 180;
             return true;
         }
-        else if (IsPieceV2(startCoord + Vector2Int.right) &&
-            !IsPieceV2(startCoord + Vector2Int.left) &&
-            !IsPieceV2(startCoord + Vector2Int.up) &&
-            IsPieceV2(startCoord + Vector2Int.down))//Bottom Right x y-1, x+1 y
+        else if (IsPiece(startCoord + Vector2Int.right) &&
+            !IsPiece(startCoord + Vector2Int.left) &&
+            !IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down))//Bottom Right x y-1, x+1 y
         {
             grid[startCoord.x, startCoord.y].rotation = 270;
             return true;
@@ -323,34 +313,34 @@ public class TileCalculator
 
     bool IsEdge(Vector2Int startCoord)
     {
-        if (IsPieceV2(startCoord + Vector2Int.right) &&
-            !IsPieceV2(startCoord + Vector2Int.left) &&
-            IsPieceV2(startCoord + Vector2Int.up) &&
-            IsPieceV2(startCoord + Vector2Int.down))
+        if (IsPiece(startCoord + Vector2Int.right) &&
+            !IsPiece(startCoord + Vector2Int.left) &&
+            IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down))
         {
             grid[startCoord.x, startCoord.y].rotation = 0;
             return true;
         }
-        else if (IsPieceV2(startCoord + Vector2Int.right) &&
-            IsPieceV2(startCoord + Vector2Int.left) &&
-            IsPieceV2(startCoord + Vector2Int.up) &&
-            !IsPieceV2(startCoord + Vector2Int.down))
+        else if (IsPiece(startCoord + Vector2Int.right) &&
+            IsPiece(startCoord + Vector2Int.left) &&
+            IsPiece(startCoord + Vector2Int.up) &&
+            !IsPiece(startCoord + Vector2Int.down))
         {
             grid[startCoord.x, startCoord.y].rotation = 90;
             return true;
         }
-        else if (!IsPieceV2(startCoord + Vector2Int.right) &&
-            IsPieceV2(startCoord + Vector2Int.left) &&
-            IsPieceV2(startCoord + Vector2Int.up) &&
-            IsPieceV2(startCoord + Vector2Int.down))
+        else if (!IsPiece(startCoord + Vector2Int.right) &&
+            IsPiece(startCoord + Vector2Int.left) &&
+            IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down))
         {
             grid[startCoord.x, startCoord.y].rotation = 180;
             return true;
         }
-        else if (IsPieceV2(startCoord + Vector2Int.right) &&
-            IsPieceV2(startCoord + Vector2Int.left) &&
-            !IsPieceV2(startCoord + Vector2Int.up) &&
-            IsPieceV2(startCoord + Vector2Int.down))
+        else if (IsPiece(startCoord + Vector2Int.right) &&
+            IsPiece(startCoord + Vector2Int.left) &&
+            !IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down))
         {
             grid[startCoord.x, startCoord.y].rotation = 270;
             return true;
