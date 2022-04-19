@@ -18,7 +18,11 @@ public class TileCalculator
     //placeholder way, I think these could be recursive as well
     public PieceType CheckPiece(int x, int y)
     {
-        if (isDoorWayInMiddle(x,y))
+        //if (isDoorWayInMiddle(x, y))
+        //{
+        //    return PieceType.Doorway;
+        //}
+        if (isDoorWayInMiddleV2(new Vector2Int(x, y)))
         {
             return PieceType.Doorway;
         }
@@ -43,6 +47,14 @@ public class TileCalculator
             return PieceType.Edge;
         }
         return PieceType.Empty;
+    }
+
+    // Potentially replace with all Vector2Int (unless we need floats, then Vector2)
+    // to render this.
+    bool IsPieceV2(Vector2Int coordinates)
+    {
+        return IsPiece(coordinates.x, coordinates.y);
+
     }
 
     bool IsPiece(int x, int y)
@@ -179,6 +191,44 @@ public class TileCalculator
             return CheckIfDoorIsNextToHallway(x, y);
         }
         return false;
+    }
+
+    /**
+     * Terrible name, but trying to determine if we have
+     * something like.
+     *    
+     *      X
+     *     XxX
+     *      X
+     */
+    bool isCrossCenter(Vector2Int startCoord)
+    {
+        return (
+            IsPieceV2(startCoord + Vector2Int.left) &&
+            IsPieceV2(startCoord + Vector2Int.right) &&
+            IsPieceV2(startCoord + Vector2Int.up) &&
+            IsPieceV2(startCoord + Vector2Int.down)
+            );
+    }
+
+    bool isDoorWayInMiddleV2(Vector2Int coordinates)
+    {
+        if (isCrossCenter(coordinates))
+        {
+            return CheckIfDoorIsNextToHallway(coordinates.x, coordinates.y);
+        } else
+        {
+            return false;
+        }
+
+        //if (IsPiece(x, y + 1) &&
+        //    IsPiece(x, y - 1) &&
+        //    IsPiece(x + 1, y) &&
+        //    IsPiece(x - 1, y)) //Checking if tile is surround by all 4 sides
+        //{
+        //    return CheckIfDoorIsNextToHallway(x, y);
+        //}
+        //return false;
     }
 
     bool CheckIfDoorIsNextToHallway(int x, int y)
