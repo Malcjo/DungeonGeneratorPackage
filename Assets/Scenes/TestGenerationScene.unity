@@ -1245,12 +1245,12 @@ PrefabInstance:
       objectReference: {fileID: 963194225}
     - target: {fileID: 2449633438132383188, guid: 187b39f2a2e241e4c8c004d25e037c2c, type: 3}
       propertyPath: JSONFiles.Array.size
-      value: 9
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2449633438132383188, guid: 187b39f2a2e241e4c8c004d25e037c2c, type: 3}
       propertyPath: JSONFiles.Array.data[0]
       value: 
-      objectReference: {fileID: 4900000, guid: 053c90febedccc943bd61de40cf73ba1, type: 3}
+      objectReference: {fileID: 4900000, guid: 7ffc1a48b11924c438216d0f545ab0ca, type: 3}
     - target: {fileID: 2449633438132383188, guid: 187b39f2a2e241e4c8c004d25e037c2c, type: 3}
       propertyPath: JSONFiles.Array.data[1]
       value: 
@@ -1286,7 +1286,7 @@ PrefabInstance:
     - target: {fileID: 2449633438132383188, guid: 187b39f2a2e241e4c8c004d25e037c2c, type: 3}
       propertyPath: JSONFiles.Array.data[9]
       value: 
-      objectReference: {fileID: 4900000, guid: 233390d180ac0b64ea7cf3cfb82e3df3, type: 3}
+      objectReference: {fileID: 4900000, guid: 7ffc1a48b11924c438216d0f545ab0ca, type: 3}
     - target: {fileID: 3422593358589192943, guid: 187b39f2a2e241e4c8c004d25e037c2c, type: 3}
       propertyPath: m_RootOrder
       value: 2

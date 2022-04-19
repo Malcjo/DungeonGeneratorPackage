@@ -2,6 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This class must match the structure of the JSON file that is getting parsed into the generator
+/*
+ * example if the Json file is structured
+ * 
+ *"rects": 
+ * [{
+ * "x": -2,
+ * "y": -3,
+ * "w": 5,
+ * "h": 3
+ * }]
+ * 
+ * Then the array within this class must match up with it's name and structure
+ * public Rect[] rects; <---- this name needs to match exactly
+ * 
+ * [System.Serializable] <---- each class must have this above for the data to be able to be stored
+ * public class Rect
+ * {
+ *       public float x;
+ *       public float y;
+ *       public float w;
+ *       public float h;
+ * }
+ * This way when parsing through a JSON file unity knows where to store all the data that corresponds to each key
+ * 
+ * 
+ */
+
 [System.Serializable]
 public class LevelData {
 

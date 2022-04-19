@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+//The the some coordinates are created from the JSON file thats parsed through the LevelData class
 public class JsonLoader : MonoBehaviour
 {
     private LevelData levelData;

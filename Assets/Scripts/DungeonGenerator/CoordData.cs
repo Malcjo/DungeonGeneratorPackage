@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+//This class is used for storing data from the JSON file when creating coordinates for a grid
 [System.Serializable]
 public class CoordData
 {
