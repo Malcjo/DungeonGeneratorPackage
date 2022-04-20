@@ -44,14 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   type: 0
-  SquarePiecesGrp:
-  - {fileID: 2218850203076338501, guid: 0316c552d922a9b4db1b4ba3a14a53aa, type: 3}
-  - {fileID: 2218850203076338501, guid: b26cd20e16b0ae14bbeae0f13284257f, type: 3}
-  - {fileID: 2218850203076338501, guid: 0c9c223abfb140547987cccbbeb5db26, type: 3}
-  - {fileID: 2218850203076338501, guid: a2035a9e7d3d31f42aaf32ad952f35f7, type: 3}
-  - {fileID: 2218850203076338501, guid: 2d19d2b2172285a459d73b385976e883, type: 3}
-  - {fileID: 2218850203076338501, guid: f5223ba72a6132d4aaf81c13eb63475f, type: 3}
-  - {fileID: 2218850203076338501, guid: 60942d707d232b0469f2331bec48af79, type: 3}
   CircularPiecesGrp:
   - {fileID: 2218850203076338501, guid: 0316c552d922a9b4db1b4ba3a14a53aa, type: 3}
   - {fileID: 2218850203076338501, guid: b26cd20e16b0ae14bbeae0f13284257f, type: 3}
@@ -59,6 +51,20 @@ MonoBehaviour:
   - {fileID: 2218850203076338501, guid: a2035a9e7d3d31f42aaf32ad952f35f7, type: 3}
   - {fileID: 2218850203076338501, guid: 2d19d2b2172285a459d73b385976e883, type: 3}
   - {fileID: 2218850203076338501, guid: f5223ba72a6132d4aaf81c13eb63475f, type: 3}
+  - {fileID: 2218850203076338501, guid: 60942d707d232b0469f2331bec48af79, type: 3}
+  SquareEmptyPieceGroup:
+  - {fileID: 2218850203076338501, guid: 0316c552d922a9b4db1b4ba3a14a53aa, type: 3}
+  SquareEdgePieceGroup:
+  - {fileID: 2218850203076338501, guid: 0c9c223abfb140547987cccbbeb5db26, type: 3}
+  SquareCornerPieceGroup:
+  - {fileID: 2218850203076338501, guid: b26cd20e16b0ae14bbeae0f13284257f, type: 3}
+  SquareHallwayPieceGroup:
+  - {fileID: 2218850203076338501, guid: a2035a9e7d3d31f42aaf32ad952f35f7, type: 3}
+  SquareDoorwayPieceGroup:
+  - {fileID: 2218850203076338501, guid: 2d19d2b2172285a459d73b385976e883, type: 3}
+  SquareDoorwayLeftCornerPieceGroup:
+  - {fileID: 2218850203076338501, guid: f5223ba72a6132d4aaf81c13eb63475f, type: 3}
+  SquareDoorwayRightCornerPieceGroup:
   - {fileID: 2218850203076338501, guid: 60942d707d232b0469f2331bec48af79, type: 3}
   rotation: 0
   tileX: 0

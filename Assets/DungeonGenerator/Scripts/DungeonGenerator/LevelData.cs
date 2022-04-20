@@ -62,10 +62,10 @@ public class LevelData {
     public class Rect
     {
         public string name = "Rect";
-        public float x;
-        public float y;
-        public float w;
-        public float h;
+        public int x;
+        public int y;
+        public int w;
+        public int h;
         public bool rotunda = false;
     }
     [System.Serializable]

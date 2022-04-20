@@ -6,12 +6,12 @@ using UnityEngine;
 [System.Serializable]
 public class CoordData
 {
-    public Vector2 positon;
+    public Vector2Int rectPosition;
     public bool round = false;
-    public CoordData(float x, float y)
+    public CoordData(int x, int y)
     {
-        positon.x = x;
-        positon.y = y;
+        rectPosition.x = x;
+        rectPosition.y = y;
     }
 
     public void SetRound(bool set)

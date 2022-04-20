@@ -97,7 +97,7 @@ public class GridManager : MonoBehaviour
             {
                 for (int y = 0; y < (max.y); y++)
                 {
-                    if (data.positon.x == x && data.positon.y == y)
+                    if (data.rectPosition.x == x && data.rectPosition.y == y)
                     {
                         Cell newCell = new Cell(x, y, Cell.Contents.Tile);
                         if (data.round)

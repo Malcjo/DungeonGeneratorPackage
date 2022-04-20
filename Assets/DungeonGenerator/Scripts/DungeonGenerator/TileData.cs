@@ -20,9 +20,29 @@ public class TileData : MonoBehaviour
     [Header("Empty, Corner, Edge, Doorway")]
 
     public PieceType type;
-    public GameObject[] SquarePiecesGrp;
     public GameObject[] CircularPiecesGrp;
-    
+
+    public GameObject[] SquareEmptyPieceGroup;
+    private GameObject SquareEmptyPiece;
+
+    public GameObject[] SquareEdgePieceGroup;
+    private GameObject SquareEdgePiece;
+
+    public GameObject[] SquareCornerPieceGroup;
+    private GameObject SquareCornerPiece;
+
+    public GameObject[] SquareHallwayPieceGroup;
+    private GameObject SquareHallwayPiece;
+
+    public GameObject[] SquareDoorwayPieceGroup;
+    private GameObject SquareDoorwayPiece;
+
+    public GameObject[] SquareDoorwayLeftCornerPieceGroup;
+    private GameObject SquareDoorwayLeftCornerPiece;
+
+    public GameObject[] SquareDoorwayRightCornerPieceGroup;
+    private GameObject SquareDoorwayRightCornerPiece;
+
     private GameObject pieceToSpawn;
     public float rotation;
     public int tileX;
@@ -48,25 +68,39 @@ public class TileData : MonoBehaviour
             switch (type)
             {
                 case PieceType.Empty:
-                    pieceToSpawn = SquarePiecesGrp[0];
+                    int num = Random.Range(0, SquareEmptyPieceGroup.Length);
+                    SquareEmptyPiece = SquareEmptyPieceGroup[num];
+                    pieceToSpawn = SquareEmptyPiece;
                     break;
                 case PieceType.Corner:
-                    pieceToSpawn = SquarePiecesGrp[1];
+                    int num2 = Random.Range(0, SquareCornerPieceGroup.Length);
+                    SquareCornerPiece = SquareCornerPieceGroup[num2];
+                    pieceToSpawn = SquareCornerPiece;
                     break;
                 case PieceType.Edge:
-                    pieceToSpawn = SquarePiecesGrp[2];
+                    int num3 = Random.Range(0, SquareEdgePieceGroup.Length);
+                    SquareEdgePiece = SquareEdgePieceGroup[num3];
+                    pieceToSpawn = SquareEdgePiece;
                     break;
                 case PieceType.Hallway:
-                    pieceToSpawn = SquarePiecesGrp[3];
+                    int num4 = Random.Range(0, SquareHallwayPieceGroup.Length);
+                    SquareHallwayPiece = SquareHallwayPieceGroup[num4];
+                    pieceToSpawn = SquareHallwayPiece;
                     break;
                 case PieceType.Doorway:
-                    pieceToSpawn = SquarePiecesGrp[4];
+                    int num5 = Random.Range(0, SquareDoorwayPieceGroup.Length);
+                    SquareDoorwayPiece = SquareDoorwayPieceGroup[num5];
+                    pieceToSpawn = SquareDoorwayPiece;
                     break;
                 case PieceType.DoorwayLeftCorner:
-                    pieceToSpawn = SquarePiecesGrp[5];
+                    int num6 = Random.Range(0, SquareDoorwayLeftCornerPieceGroup.Length);
+                    SquareDoorwayLeftCornerPiece = SquareDoorwayLeftCornerPieceGroup[num6];
+                    pieceToSpawn = SquareDoorwayLeftCornerPiece;
                     break;
                 case PieceType.DoorwayRightCorner:
-                    pieceToSpawn = SquarePiecesGrp[6];
+                    int num7 = Random.Range(0, SquareDoorwayRightCornerPieceGroup.Length);
+                    SquareDoorwayRightCornerPiece = SquareDoorwayRightCornerPieceGroup[num7];
+                    pieceToSpawn = SquareDoorwayRightCornerPiece;
                     break;
             }
         }
