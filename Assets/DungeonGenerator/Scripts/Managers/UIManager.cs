@@ -26,6 +26,8 @@ public class UIManager : MonoBehaviour
         gridManager.SpawnPlayer();
         if (gridManager.playerSpawned)
         {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
             playBtn.SetActive(false);
             ExitBtn.SetActive(false);
             GenerateBtn.SetActive(false);

@@ -40,6 +40,7 @@ public class GridManager : MonoBehaviour
                 defaultCamera.SetActive(false);
                 playerSpawned = true;
                 player = Instantiate(playerOBJ, playerStartCoord, Quaternion.identity);
+
             }
         }
     }
