@@ -14,7 +14,7 @@ public class TileCalculator
         this.max = max;
         grid = Grid;
     }
-
+    //NOTE WHEN CHECKING VALUIES REMEMBER DEFAULT IS SET TO FLIPPED
     //placeholder way, I think these could be recursive as well
     public PieceType CheckPiece(int x, int y)
     {
@@ -41,6 +41,14 @@ public class TileCalculator
         else if (IsEdge(new Vector2Int(x, y)))
         {
             return PieceType.Edge;
+        }
+        else if (IsDeadEnd(new Vector2Int(x, y)))
+        {
+            return PieceType.Deadend;
+        }
+        else if (isCrossCenter(new Vector2Int(x, y)))
+        {
+            return PieceType.Empty;
         }
         return PieceType.Empty;
     }
@@ -191,7 +199,14 @@ public class TileCalculator
     {
         if (isCrossCenter(coordinates))
         {
-            return CheckIfDoorIsNextToHallway(coordinates);
+            if (CheckIfDoorIsNextToHallway(coordinates))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
         else
         {
@@ -343,6 +358,43 @@ public class TileCalculator
             IsPiece(startCoord + Vector2Int.down))
         {
             grid[startCoord.x, startCoord.y].rotation = 270;
+            return true;
+        }
+        return false;
+    }
+
+    bool IsDeadEnd(Vector2Int startCoord)
+    {
+        if (!IsPiece(startCoord + Vector2Int.right) &&
+            !IsPiece(startCoord + Vector2Int.left) &&
+            !IsPiece(startCoord + Vector2Int.up) &&
+            IsPiece(startCoord + Vector2Int.down))
+        {
+            grid[startCoord.x, startCoord.y].rotation = 180;
+            return true;
+        }
+        else if (!IsPiece(startCoord + Vector2Int.right) &&
+            IsPiece(startCoord + Vector2Int.left) &&
+            !IsPiece(startCoord + Vector2Int.up) &&
+            !IsPiece(startCoord + Vector2Int.down))
+        {
+            grid[startCoord.x, startCoord.y].rotation = 90;
+            return true;
+        }
+        else if (IsPiece(startCoord + Vector2Int.right) &&
+            !IsPiece(startCoord + Vector2Int.left) &&
+            !IsPiece(startCoord + Vector2Int.up) &&
+            !IsPiece(startCoord + Vector2Int.down))
+        {
+            grid[startCoord.x, startCoord.y].rotation = 270;
+            return true;
+        }
+        else if (!IsPiece(startCoord + Vector2Int.right) &&
+            !IsPiece(startCoord + Vector2Int.left) &&
+            IsPiece(startCoord + Vector2Int.up) &&
+            !IsPiece(startCoord + Vector2Int.down))
+        {
+            grid[startCoord.x, startCoord.y].rotation = 0;
             return true;
         }
         return false;

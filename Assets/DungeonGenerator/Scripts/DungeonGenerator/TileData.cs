@@ -10,7 +10,8 @@ public enum PieceType
     Doorway,
     Hallway,
     DoorwayLeftCorner,
-    DoorwayRightCorner
+    DoorwayRightCorner,
+    Deadend
 }
 
 [System.Serializable]
@@ -42,6 +43,9 @@ public class TileData : MonoBehaviour
 
     public GameObject[] SquareDoorwayRightCornerPieceGroup;
     private GameObject SquareDoorwayRightCornerPiece;
+
+    public GameObject[] SquareDeadendPieceGroup;
+    private GameObject SquareDeadendPiece;
 
     private GameObject pieceToSpawn;
     public float rotation;
@@ -101,6 +105,11 @@ public class TileData : MonoBehaviour
                     int num7 = Random.Range(0, SquareDoorwayRightCornerPieceGroup.Length);
                     SquareDoorwayRightCornerPiece = SquareDoorwayRightCornerPieceGroup[num7];
                     pieceToSpawn = SquareDoorwayRightCornerPiece;
+                    break;
+                case PieceType.Deadend:
+                    int num8 = Random.Range(0, SquareDeadendPieceGroup.Length);
+                    SquareDeadendPiece = SquareDeadendPieceGroup[num8];
+                    pieceToSpawn = SquareDeadendPiece;
                     break;
             }
         }

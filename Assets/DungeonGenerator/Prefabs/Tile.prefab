@@ -66,6 +66,8 @@ MonoBehaviour:
   - {fileID: 2218850203076338501, guid: f5223ba72a6132d4aaf81c13eb63475f, type: 3}
   SquareDoorwayRightCornerPieceGroup:
   - {fileID: 2218850203076338501, guid: 60942d707d232b0469f2331bec48af79, type: 3}
+  SquareDeadendPieceGroup:
+  - {fileID: 2218850203076338501, guid: f94ade43afc3e6b43815ca878dca9982, type: 3}
   rotation: 0
   tileX: 0
   tileY: 0
